@@ -15,16 +15,13 @@ let myInstance;
 let canvasContainer;
 var centerHorz, centerVert;
 
-class MyClass {
-    constructor(param1, param2) {
-        this.property1 = param1;
-        this.property2 = param2;
-    }
+let seed = 0;
 
-    myMethod() {
-        // code to run when method is called
-    }
-}
+const houseColor = "#fa961a";
+const treeColor = "#507c01";
+const skyColor = "#90b0c9";
+const rocksColor = "#698092";
+const grassColor = "#2e8100";
 
 function resizeScreen() {
   centerHorz = canvasContainer.width() / 2; // Adjusted for drawing logic
@@ -34,6 +31,11 @@ function resizeScreen() {
   // redrawCanvas(); // Redraw everything based on new size
 }
 
+// listener for reimagine button
+$("#reimagine").click(function() {
+  seed++;
+});
+
 // setup() function is called once when the program starts
 function setup() {
   // place our canvas, making it fit our container
@@ -41,9 +43,6 @@ function setup() {
   let canvas = createCanvas(canvasContainer.width(), canvasContainer.height());
   canvas.parent("canvas-container");
   // resize canvas is the page is resized
-
-  // create an instance of the class
-  myInstance = new MyClass("VALUE1", "VALUE2");
 
   $(window).resize(function() {
     resizeScreen();
@@ -53,27 +52,53 @@ function setup() {
 
 // draw() function is called repeatedly, it's the main animation loop
 function draw() {
-  background(220);    
-  // call a method on the instance
-  myInstance.myMethod();
+  randomSeed(seed);
+  background(100);
 
-  // Set up rotation for the rectangle
-  push(); // Save the current drawing context
-  translate(centerHorz, centerVert); // Move the origin to the rectangle's center
-  rotate(frameCount / 100.0); // Rotate by frameCount to animate the rotation
-  fill(234, 31, 81);
+  // grabbing from example code
   noStroke();
-  rect(-125, -125, 250, 250); // Draw the rectangle centered on the new origin
-  pop(); // Restore the original drawing context
 
-  // The text is not affected by the translate and rotate
-  fill(255);
-  textStyle(BOLD);
-  textSize(140);
-  text("p5*", centerHorz - 105, centerVert + 40);
-}
+  fill(skyColor);
+  rect(0, 0, width, height / 2);
 
-// mousePressed() function is called once after every time a mouse button is pressed
-function mousePressed() {
-    // code to run when mouse is pressed
+  fill(grassColor);
+  rect(0, height / 2, width, height / 2);
+  
+  fill(rocksColor);
+  beginShape();
+  vertex(0, height / 2);
+  const steps = 5;
+  
+  // adapted from wes's experiment 2 code
+  for (let i = 0; i < steps + 1; i++) {
+    let x = (width * i) / steps;
+    let y =
+      height / 2 - (random() * height) / 4 - height / 4;
+    vertex(x, y);
+  }
+  vertex(width, height / 2);
+  endShape(CLOSE);
+  
+  fill(treeColor);
+  const trees = 25*random();
+  const scrub = mouseX/width;
+  for (let i = 0; i < trees; i++) {
+    let z = random();
+    let x = width * ((random() + (scrub/50 + millis() / 500000.0) / z) % 1);
+    let s = width / 50 / z;
+    let y = height / 2 + height / 20 / z;
+    triangle(x, y - s, x - s / 4, y, x + s / 4, y);
+  }
+
+  // freestyling the house? (based off triangles)
+  fill(houseColor);
+  const house = 1;
+  const move = mouseX/width;
+  for (let i = 0; i < house; i++) {
+    let z = random();
+    let x = width * ((random() + (move/50 + millis() / -100000.0) / z) % 1);
+    let s = width / 50 / z;
+    let y = height / 2 + height / 20 / z;
+    rect(x, y - s, x - s / 4, y);
+  }
 }
