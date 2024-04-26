@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- This title is used for tabs and bookmarks -->
+	<title>Experiment 4 - Infinite Worlds</title>
+
+	<!-- Use UTF character set, a good idea with any webpage -->
+	<meta charset="UTF-8" />
+	<!-- Set viewport so page remains consistently scaled w narrow devices -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<!-- Include CSS file, including a site-wide CSS and for this particular page -->
+	<link rel="stylesheet" type="text/css" href="../css/site.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<!-- Load jQuery library -->
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+	<!-- Load p5.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.2.0/p5.min.js" integrity="sha512-b/htz6gIyFi3dwSoZ0Uv3cuv3Ony7EeKkacgrcVg8CMzu90n777qveu0PBcbZUA7TzyENGtU+qZRuFAkfqgyoQ==" crossorigin="anonymous"></script>
+
+	<!-- Link to javascript files - DEFER waits until all elements are rendered -->
+    <script type="text/javascript" src="../js/site.js" DEFER></script>
+	<!-- Use me for a JavaScript OOP Project -->
+	<script type="text/javascript" src="./js/p2_base.js" DEFER></script>
+	<!-- Use me for a p5.js project -->
+	<script type="text/javascript" src="./js/p2_solution.js" DEFER></script>
+	<script type="text/javascript" src="./js/xxhash.min.js" DEFER></script>
+
+
+</head>
+<body>
+	<!-- Style this page by changing the CSS in ../css/site.css or css/experiment.css -->
+	<main id="content">
+		<section>
+
+			<h1>Experiment 4 - Infinite Worlds</h1>
+
+			<div class="minor-section">
+				<div id="container"></div>
+				<!-- canvas will be added here -->
+
+					
+			</div>
+                <div class="fullscreen-box">
+                    <button id="fullscreen">Fullscreen</button>
+                </div>
+			</div>
+
+			<div class="two-column">
+			<div class="minor-section">
+				<h2>Description</h2>
+				<p>This is an overworld generator using a lot of ChatGPT to create Arrakis.</p>
+				<p>I wanted to create something silly out of Dune, so I created Arrakis with a little worm. 
+				</p>
+				<div class="image-wrapper">
+					<img src="../img/arrakis.png">
+				</div>
+			</div>
+
+			<div class="minor-section">
+				<h2>Technical</h2>
+				<p>Variation in Space: As the audience browses my world they'll see the dunes change color based on the wind speed, which is represented through the changing colors of the dunes.
+				</p>
+				<p>Variations in Key: Different worlds will have different variations of how the dunes are randomized, but the wind will change the shape of them anyways.
+				</p>
+				<p>Signs of Life: A little worm is seen when the page is first loaded and fades in and out as time progresses. The wind changes with the mouse movement and the tiles themselves shift up and down with the wind.</p>
+			</div>
+		</div>
+			<div class="minor-section">
+				<h2>Reflection</h2>
+				<p>
+					This was a huge pain in the ass to code again, I used a lot of ChatGPT to create some basic functions in order to generate the shifting sands effect.
+					I started by asking ChatGPT how to generate various tile colors, then that turned into asking how to create a noise variable in order to get the color variation with the sand colors. That eventually turned into creating a 3D effect, which in turn made it more realistic.
+					Eventually I was able to create the worm with a opacity function. This took a lot of hours trying to ask ChatGPT the right questions and adapting the code into the correct version of the code.
+				</p>
+			</div>
+
+		</section>
+		<nav id="links" class="minor-section">
+			<!-- Put link back to homepage here. -->
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+            </ul>
+		</nav>
+	</main>
+</body>
+</html>

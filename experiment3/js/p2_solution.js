@@ -8,8 +8,9 @@ const TILE_SOLID = "X";
 const TILE_CORNER = "C";
 const TILE_TRANSITION = "T";
 
+// overworld generator
 // Define the grid generation function with corners and transitions
-function generateGrid(numCols, numRows) {
+function generateGrid_ow(numCols, numRows) {
   let grid = [];
 
   // Generate the grid with empty tiles
@@ -59,7 +60,7 @@ function generateGrid(numCols, numRows) {
   return grid;
 }
 
-function drawGrid(grid) {
+function drawGrid_ow(grid) {
   background(128);
   
   // Calculate the middle section of the grid
@@ -78,6 +79,52 @@ function drawGrid(grid) {
     }
   }
 }
+
+
+// // Town generator 
+  function generateGrid_town(numCols, numRows) {
+    let grid = [];
+
+    // Calculate the center of the grid
+    let centerX = Math.floor(numCols / 2);
+    let centerY = Math.floor(numRows / 2);
+
+    // Generate the grid with empty tiles
+    for (let i = 0; i < numRows; i++) {
+      let row = [];
+      for (let j = 0; j < numCols; j++) {
+        row.push(TILE_EMPTY);
+      }
+      grid.push(row);
+    }
+
+    // Place solid tiles in a circular pattern
+    for (let i = 0; i < numRows; i++) {
+      for (let j = 0; j < numCols; j++) {
+        let distanceToCenter = Math.sqrt(Math.pow(j - centerX, 2) + Math.pow(i - centerY, 2));
+        if (distanceToCenter <= Math.min(centerX, centerY) * 0.7) { // Adjust the factor to control the circle size
+          grid[i][j] = TILE_SOLID;
+        }
+      }
+    }
+
+    return grid;
+  }
+
+  function drawGrid_town(grid) {
+    background(128);
+  
+    // Loop through the entire grid
+    for (let i = 0; i < grid.length; i++) {
+      for (let j = 0; j < grid[0].length; j++) {
+        if (!gridCheck(grid, i, j, "_")) {
+          placeTile(i, j, (floor(random(27))), 3);
+        } else {
+          drawContext(grid, i, j, "_", 27, 3);
+        }
+      }
+    }
+  }
 
 // Step 4 autotiling logic (thanks ChatGPT)
 function gridCheck(grid,i,j,target){// Check if the location is within the grid boundaries

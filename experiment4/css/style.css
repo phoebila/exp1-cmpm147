@@ -1,0 +1,40 @@
+/* style.css */
+
+/* Set the canvas element to be the full size of the container */
+canvas {
+    width: 100%;
+    height: 100%;
+}
+
+/* Center the canvas element on the page */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#canvas-container {
+    width: 100%;
+    height: 600px;
+}
+
+/* Columns - this was originally for the homepage, but I found it useful for other pages as well. */
+
+.two-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .two-column>* {
+    min-width: 350px;
+  }
+  
+  .two-column>*:nth-child(1) {
+    flex: 1;
+  }
+  
+  .two-column>*:nth-child(2) {
+    flex: 1;
+  }

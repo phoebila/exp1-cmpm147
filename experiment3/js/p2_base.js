@@ -22,7 +22,7 @@ function reseed() {
 }
 
 function regenerateGrid() {
-  select("#asciiBox").value(gridToString(generateGrid(numCols, numRows)));
+  select("#asciiBox").value(gridToString(generateGrid_ow(numCols, numRows)));
   reparseGrid();
 }
 
@@ -56,7 +56,6 @@ function setup() {
   numCols = select("#asciiBox").attribute("rows") | 0;
   numRows = select("#asciiBox").attribute("cols") | 0;
 
-//   console.log(numCols);
 
   // place our canvas, making it fit our container
   canvas = createCanvas(16 * numCols, 16 * numRows).parent("canvasContainer"); // Get canvas element
@@ -73,25 +72,15 @@ function setup() {
 
 }
 
-
 function draw() {
   randomSeed(seed);
-  drawGrid(currentGrid);
+  drawGrid_ow(currentGrid);
 }
 
 function placeTile(i, j, ti, tj) {
   image(tilesetImage, 16 * j, 16 * i, 16, 16, 8 * ti, 8 * tj, 8, 8);
 }
 
-function placeTileFromMouse() {
-  let cellWidth = width / numCols;
-  let cellHeight = height / numRows;
-  let j = floor(mouseX / cellWidth);
-  let i = floor(mouseY / cellHeight);
-  let ti = floor(random(2)); // Random tile index for testing
-  let tj = floor(random(2)); // Random tile index for testing
-  placeTile(i, j, ti, tj);
-}
 
 
 
